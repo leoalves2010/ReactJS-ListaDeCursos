@@ -15,7 +15,8 @@ class NewCourseForm extends Component {
     }
 
     static defaultProps = {
-        onAdd: () => {}
+        onAdd: () => {},
+        listCategories: []
     }
 
     handleChange(event) {
@@ -32,7 +33,6 @@ class NewCourseForm extends Component {
 
         if(name !== '' && image !== '' && category !== '') {
             const newCourse = {
-                id: Date.now(),
                 name,
                 image,
                 category
@@ -62,12 +62,9 @@ class NewCourseForm extends Component {
                     <span>Categoria:</span>
                     <select name="category" value={this.state.category} onChange={this.handleChange}>
                         <option value="">Selecionar...</option>
-                        <option value="Javascript">Javascript</option>
-                        <option value="PHP">PHP</option>
-                        <option value="C#">C#</option>
-                        <option value="Java">Java</option>
-                        <option value="Python">Python</option>
-                        <option value="Ruby">Ruby</option>
+                        {
+                            this.props.categories.map(category => <option value={category.name}>{category.name}</option>)
+                        }
                     </select>
                 </label>
                 <button type="submit">Criar Curso</button>
